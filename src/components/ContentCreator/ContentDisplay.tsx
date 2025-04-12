@@ -109,25 +109,33 @@ export const ContentDisplay: React.FC = () => {
     // A commonProps objektumot szétterítjük (...commonProps)
     switch (content.type) {
       case 'text':
+        {
         // Feltételezzük, hogy a TextDisplay fogadja a className és onClick propokat
         return <TextDisplay content={content} {...commonProps} />;
+        }
       case 'title':
+        {
         return <TitleDisplay content={content} {...commonProps} />;
+        }
       case 'table':
+        {
         return <TableDisplay content={content} {...commonProps} />;
+        }
       case 'button':
+        {
         // Figyelem: A ButtonDisplay lehet, hogy nem közvetlenül a gyökérelemre teszi ezeket a propokat.
-        // Ha a ButtonDisplay egy saját gombot renderel, lehet, hogy máshogy kell kezelni az onClick-et és a className-t.
-        // Ez a javítás feltételezi, hogy a ButtonDisplay köré van egy wrapper div, ami fogadja ezeket.
         return <ButtonDisplay content={content} {...commonProps} />;
+        }
       case 'card':
         return <CardDisplay content={content} {...commonProps} />;
       case 'grid':
         return <GridDisplay content={content} {...commonProps} />;
       default:
+        {
         // Biztosítsuk, hogy a default ág explicit null-t adjon vissza TypeScript számára
         const exhaustiveCheck: never = content;
         return null;
+        }
     }
   };
   // *** JAVÍTÁS VÉGE (additionalProps eltávolítása) ***
@@ -155,8 +163,8 @@ export const ContentDisplay: React.FC = () => {
 
 
   // Calculate the scale and transform styles based on zoom level and focused content
-  let canvasStyle: React.CSSProperties = {
-    transform: `scale(${zoomLevel}) translate(${canvasOffset.x / zoomLevel}px, ${canvasOffset.y / zoomLevel}px)`,
+  const canvasStyle: React.CSSProperties = {
+    transform: `scale(${zoomLevel}) translate(${canvasOffset.x / zoomLevel}px, ${canvasOffset.y / zoomLevel}px)`, //canvasStyle
     transformOrigin: 'center center',
     transition: isDragging ? 'none' : 'transform 0.3s ease-out',
   };

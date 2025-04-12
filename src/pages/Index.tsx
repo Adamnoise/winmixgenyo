@@ -9,7 +9,7 @@ import { ContentCreationDrawer } from '@/components/ContentCreator/ContentCreati
 const Index = () => {
   return (
     <ContentProvider>
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-300">
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-gray-300" >
         <Drawer>
           <Header />
           <div className="container mx-auto px-4">

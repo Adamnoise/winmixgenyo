@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import HeroBackground from './HeroBackground';
 import HeroContent from './HeroContent';
 import MatchCard from './MatchCard';
@@ -231,9 +231,9 @@ const HeroCarousel = () => {
     }, 8000);
     
     return () => clearTimeout(timer);
-  }, [currentSlide, isAnimating]);
-
-  const goToPrevSlide = () => {
+  }, [currentSlide, isAnimating, goToNextSlide, goToPrevSlide]);
+  
+  const goToPrevSlide = useCallback(() => {
     if (isAnimating) return;
     
     setIsAnimating(true);
@@ -241,10 +241,9 @@ const HeroCarousel = () => {
     
     setTimeout(() => {
       setIsAnimating(false);
-    }, 700);
-  };
+    }, 700);}, [isAnimating, slides.length]);
 
-  const goToNextSlide = () => {
+  const goToNextSlide = useCallback(() => {
     if (isAnimating) return;
     
     setIsAnimating(true);
@@ -253,7 +252,7 @@ const HeroCarousel = () => {
     setTimeout(() => {
       setIsAnimating(false);
     }, 700);
-  };
+  }, [isAnimating, slides.length]);
 
   const goToSlide = (index: number) => {
     if (isAnimating || currentSlide === index) return;
@@ -266,7 +265,7 @@ const HeroCarousel = () => {
     }, 700);
   };
 
-  return (
+    return (
     <section id="hero" className="relative">
       <div className="relative min-h-[80vh] flex items-center pt-28 pb-16 overflow-hidden">
         <HeroBackground />
